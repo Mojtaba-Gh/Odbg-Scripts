@@ -1,7 +1,7 @@
 start:
-	mov start_addr, dc90000
+	mov start_addr, 10000000
 	mov end_addr, start_addr
-	add end_addr , 38000
+	add end_addr , 70000
 	mov addr, start_addr
 setbp:
 	gci addr, COMMAND					;get command String
@@ -88,48 +88,29 @@ setbp:
 	cmp addr , end_addr
 	jl setbp
 
-	;C:\CLIP\Lib\PackEcu\CommManager.dll
-	IFB end_addr, dd30000
-		mov start_addr, dd30000
+	;C:\CLIP\Lib\Borneo\qt-mt.dll
+	IFB end_addr, 39D00000
+		mov start_addr, 39D00000
 		mov end_addr, start_addr
-		add end_addr , 7f000
+		add end_addr , 4b1000
 		mov addr, start_addr
 		jmp setbp
 	ENDIF
 	
-	;C:\CLIP\Lib\PackEcu\PackEcuCommon.dll
-	IFB end_addr, ddb0000
-		mov start_addr, ddb0000
+	;C:\CLIP\Lib\Borneo\ACE.dll
+	IFB end_addr, 61810000
+		mov start_addr, 61810000
 		mov end_addr, start_addr
-		add end_addr , 46000
+		add end_addr , 14c000
 		mov addr, start_addr
 		jmp setbp
 	ENDIF
 
-	;C:\CLIP\Lib\PackEcu\DiagData.dll
-	IFB end_addr, de00000
-		mov start_addr, de00000
+	;C:\CLIP\Lib\Application\ClipWidgets.dll
+	IFB end_addr, 61E70000
+		mov start_addr, 61E70000
 		mov end_addr, start_addr
-		add end_addr , 61000
+		add end_addr , 58000
 		mov addr, start_addr
 		jmp setbp
 	ENDIF
-
-	;C:\CLIP\Lib\PackEcu\DRProtocol.dll
-	IFB end_addr, de70000
-		mov start_addr, de70000
-		mov end_addr, start_addr
-		add end_addr , 38000
-		mov addr, start_addr
-		jmp setbp
-	ENDIF
-
-	;C:\CLIP\Lib\Application\IHMIntegrity.dll
-	IFB end_addr, e040000
-		mov start_addr, e040000
-		mov end_addr, start_addr
-		add end_addr , 8f000
-		mov addr, start_addr
-		jmp setbp
-	ENDIF
-
