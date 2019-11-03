@@ -1,0 +1,59 @@
+GCI addr, TYPE
+	10 	push
+	20 	pop
+	50	jmp dword
+	60 	jmp
+	70	call
+	80 	return
+
+#############################
+
+GOPI addr, index, info
+----------------------
+Get information about operands of asm command
+
+"index" is between 1 and 3
+
+"info" can be :
+	- TYPE Type of operand (extended set DEC_xxx, see OllyDbg Plugin API)
+	- SIZE Size of operand, bytes
+	- GOOD Whether address and data valid
+	- ADDR Address if memory, index if register
+	- DATA Actual value (only integer operands)
+
+Example:
+	GOPI eip, 1, SIZE
+   
+  Okay some more infomation about 'TYPE' (from plugin.h):
+   	DEC_TYPEMASK   0x1F            // Type of memory byte
+   	DEC_UNKNOWN  0x00            // Unknown type
+   	DEC_BYTE     0x01            // Accessed as byte
+     	DEC_WORD     0x02            // Accessed as short
+     	DEC_NEXTDATA 0x03            // Subsequent byte of data
+     	DEC_DWORD    0x04            // Accessed as long
+     	DEC_FLOAT4   0x05            // Accessed as float
+     	DEC_FWORD    0x06            // Accessed as descriptor/long pointer
+     	DEC_FLOAT8   0x07            // Accessed as double
+     	DEC_QWORD    0x08            // Accessed as 8-byte integer
+     	DEC_FLOAT10  0x09            // Accessed as long double
+     	DEC_TBYTE    0x0A            // Accessed as 10-byte integer
+     	DEC_STRING   0x0B            // Zero-terminated ASCII string
+     	DEC_UNICODE  0x0C            // Zero-terminated UNICODE string
+     	DEC_3DNOW    0x0D            // Accessed as 3Dnow operand
+     	DEC_SSE      0x0E            // Accessed as SSE operand
+     	DEC_TEXT     0x10            // For use in t_result only
+     	DEC_BYTESW   0x11            // Accessed as byte index to switch
+     	DEC_NEXTCODE 0x13            // Subsequent byte of command
+     	DEC_COMMAND  0x1D            // First byte of command
+     	DEC_JMPDEST  0x1E            // Jump destination
+     	DEC_CALLDEST 0x1F            // Call (and maybe jump) destination
+	
+   	DEC_PROCMASK   0x60            // Procedure analysis
+     	DEC_PROC     0x20            // Start of procedure
+     	DEC_PBODY    0x40            // Body of procedure
+     	DEC_PEND     0x60            // End of procedure
+   	DEC_CHECKED    0x80            // Byte was analysed
+   	DEC_SIGNED     0x100           // For use in t_result only
+
+
+#############################
