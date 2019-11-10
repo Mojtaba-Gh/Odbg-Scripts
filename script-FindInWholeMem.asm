@@ -1,11 +1,11 @@
 ;finding in whole memmory! 
-    findmem #534730313130363533#        ;<?xml
+    findmem #534730313130363533#
     mov sfile, "C:\Users\NEGAR\Desktop\find-xml-mem.txt"
     wrt sfile, $RESULT
     mov addr, $RESULT
     add addr, 1
 find:
-    findmem #534730313130363533#, addr        ;<?xml
+    findmem #534730313130363533#, addr
     wrta sfile, $RESULT
     ifne $RESULT, 0
         mov addr, $RESULT
