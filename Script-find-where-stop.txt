@@ -1,5 +1,0 @@
-START:
-    mov sfile, "C:\Users\NEGAR\Desktop\Address.txt"
-    wrta sfile, eip
-    sti
-    jmp START
