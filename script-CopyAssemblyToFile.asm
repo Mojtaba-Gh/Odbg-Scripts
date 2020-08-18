@@ -1,6 +1,8 @@
-mov sfile, "C:\Users\NEGAR\Desktop\Address.txt"
+mov sfile, "C:\Users\NEGAR\Desktop\Modeule-assembly.txt"
 wrt sfile, 0
 var string
+mov strat_addr, 3543
+mov end_addr, 3673
 START:
     gmi eip, NAME
     mov string, $RESULT
@@ -17,3 +19,5 @@ START:
     log string
     sto
     jmp START
+END:
+    msg "Finished"

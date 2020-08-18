@@ -1,0 +1,83 @@
+mov Outfile, "C:\Users\GDS\Desktop\ecucodes.txt"
+START:
+    mov first_addr, eip
+    ; Model Name
+    mov start_uni, eax
+    mov ASCII, ""
+    call GetUni
+    mov output, ASCII
+    add output, ","
+    run
+
+    ; Model Year
+    mov start_uni, edx-2
+    mov ASCII, ""
+    call GetUni
+    add output, ASCII
+    add output, ","
+    run
+
+    ; Engine
+    mov start_uni, eax
+    mov ASCII, ""
+    call GetUni
+    add output, ASCII
+    add output, ","
+
+    ; Node Name 1
+    mov start_uni, [esp + 9c]
+    mov ASCII, ""
+    call GetUni
+    add output, ASCII
+    add output, ","
+
+    ; Node Name 2
+    mov start_uni, [esp + 98]
+    mov ASCII, ""
+    call GetUni
+    add output, ASCII
+    add output, ","
+
+    ; Node Name 3
+    mov start_uni, [esp + 94]
+    mov ASCII, ""
+    call GetUni
+    add output, ASCII
+    add output, ","
+    run
+
+    ; Check repeat car name
+    ife first_addr, eip
+        run
+        run
+        run
+    endif
+
+    ; xml file
+    mov start_uni, ecx + 1e
+    mov ASCII, ""
+    call GetUni
+    add output, ASCII
+
+    log output
+    wrta Outfile, output
+    run
+
+    jmp START
+
+    jmp END
+
+GetUni:
+    mov st, 5
+    STR st
+    mov tmp, [start_uni], 1
+    ife tmp, 00
+        ret
+    endif
+    mov st, [start_uni], 1
+    ;STR st
+    add ASCII, st
+    add start_uni, 2
+    jmp GetUni
+
+END:

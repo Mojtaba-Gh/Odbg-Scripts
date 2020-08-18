@@ -1,0 +1,58 @@
+    mov st_eip, eip
+    mov st_eax, eax
+    mov st_ecx, ecx
+    mov st_edx, edx
+    mov st_ebx, ebx
+    mov st_esp, esp
+    mov st_ebp, ebp
+    mov st_esi, esi
+    mov st_edi, edi
+
+    mov find_addr_1, 53693b4        ;main thread    => +D2AC
+    mov find_addr_3, 6dedadb7       ;mscorlib       => +1BDB7
+    mov find_addr_4, 6dedabcc       ;mscorlib       => +1BBCC
+
+    mov ecucode_addr,  163d7f98
+    mov id_addr,  ecucode_addr
+    add id_addr, 8d
+
+    bc st_eip
+start:
+    mov eip, st_eip
+    mov eax, st_eax
+    mov ecx, st_ecx
+    mov edx, st_edx
+    mov ebx, st_ebx
+    mov esp, st_esp
+    mov ebp, st_ebp
+    mov esi, st_esi
+    mov edi, st_edi
+
+    bp find_addr_1
+    run                 ;=> goto 1
+    bc find_addr_1
+    bp find_addr_3
+    mov find_addr_5, find_addr_3
+    gci find_addr_3, SIZE
+    add find_addr_5, $RESULT
+    bp find_addr_5
+    run                 ;=> goto 3
+    bc find_addr_3
+
+    bp find_addr_4
+    run                 ;=> goto 4
+    bc find_addr_4
+    mov git_addr, ecx
+    run                 ;=> goto 5
+    bc find_addr_5
+    
+    jmp start
+
+
+
+
+
+
+
+
+

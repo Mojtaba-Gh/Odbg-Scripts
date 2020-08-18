@@ -1,0 +1,37 @@
+;finding in whole memmory! 
+; conti4  =>  3c73797374656d747265652073797374656d69643d22544553545f4e45575f3036303131325f3030323222206d6d6369643d2222206d6d63747970653d22656e222076657273696f6e3d22312e302220646174653d22323031332d30382d32382220617574686f723d22eab980ec97b0ec88982220686973746f72793d2247726f7570696e6720436f6e74696e656e74616c2032223e
+; ESNEG0  =>  3c73797374656d747265652073797374656d69643d22544553545f4e45575f3036303131325f3030313722206d6d6369643d22434f4e54493422206d6d63747970653d22656e222076657273696f6e3d22312e302220646174653d22323031322d30382d32392220617574686f723d22ec9db4ec9eacec9db82220686973746f72793d222845534e4129205468657461202d204d504920ec9ca0ec97b020467265657a654672616d65204d617374657220eca081ec9aa920223e0d0a20203c
+; EBM3G0        =>  450042004D00330047003000
+; ESNEG0        =>  450053004E00450047003000
+
+
+mov sfile, "C:\Users\GDS\Desktop\find-xml-mem.txt"
+find:
+    sto
+    findmem #410030002E00670069007400#
+    wrta sfile, $RESULT
+    log $RESULT
+    ifne $RESULT, 0
+        ; bc eip
+        ; sto
+        ; run
+        jmp found
+    endif
+    findmem #41302E676974#
+    wrta sfile, $RESULT
+    log $RESULT
+    ifne $RESULT, 0
+        ; bc eip
+        ; sto
+        ; run
+        jmp found
+    endif
+    jmp find
+found:
+    cmt eip, "Find A0.git !!!!!!!!!!!!!!!!!!!!!! - 1"
+    gmi eip, NAME
+    mov string, "Find Here  =>  : "
+    add string, $RESULT
+    add string, "  :  "
+    add string, eip
+    wrta sfile, string

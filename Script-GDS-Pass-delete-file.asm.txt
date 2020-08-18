@@ -1,0 +1,11 @@
+START:
+    ;mov prev_file, #3100310031003100310031002E0078006D006C000000280029000000#
+LOOP:
+    mov start_addr, ecx + 1e
+    mov size, 1c
+    mov new_file, [start_addr], size
+    log new_file
+    mov [start_addr], prev_file, size
+    mov prev_file, new_file
+    ;run
+    ;jmp LOOP

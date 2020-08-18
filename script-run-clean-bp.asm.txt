@@ -1,0 +1,4 @@
+start:
+    run
+    bc eip
+    jmp start
